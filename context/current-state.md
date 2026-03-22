@@ -4,9 +4,9 @@
 
 ## Project Status
 
-**Phase:** Pre-development
-**Timeline:** Week 0 of 4 (5-week plan including Week 1 setup)
-**Next Milestone:** Monorepo scaffolding + Supabase setup (Week 1)
+**Phase:** Week 1 (Foundation)
+**Timeline:** Week 1 of 4 (5-week plan including Week 1 setup)
+**Next Milestone:** Supabase schema and migrations
 
 ## What's Complete
 
@@ -30,16 +30,27 @@
 - ✅ Cloudflare account ready
 - ✅ GitHub repo initialized
 
+### Week 1: Monorepo Scaffolding ✅
+- ✅ **37 files created** across monorepo structure
+- ✅ pnpm workspace configured with 3 packages
+- ✅ TypeScript strict mode enabled across all packages
+- ✅ All packages compile successfully
+- ✅ 5 tests passing (worker-api, worker-jobs, frontend)
+- ✅ Wrangler configured for both workers
+- ✅ Vite + React frontend with TanStack Router and Query
+- ✅ Hono API with @hono/zod-openapi integration
+- ✅ Development scripts and CI/CD workflow skeleton ready
+
 ## What's Next
 
 ### Week 1: Foundation (Target: 5 days)
-1. **Monorepo scaffolding**
-   - Create frontend/, worker-api/, worker-jobs/, shared/ packages
-   - Configure pnpm workspaces
-   - Set up Wrangler config for both workers
-   - Configure TypeScript strict mode across all packages
+1. ~~**Monorepo scaffolding**~~ ✅ **COMPLETE**
+   - ~~Create frontend/, worker-api/, worker-jobs/, shared/ packages~~
+   - ~~Configure pnpm workspaces~~
+   - ~~Set up Wrangler config for both workers~~
+   - ~~Configure TypeScript strict mode across all packages~~
 
-2. **Supabase setup**
+2. **Supabase setup** 🔄 **NEXT**
    - Run database migrations (create all 6 tables)
    - Configure RLS policies for all tables
    - Set up auth (email + password only)
@@ -116,11 +127,14 @@ str-platform/
 │   ├── architecture.md        # Tech stack, monorepo, constraints
 │   ├── conventions.md         # Coding standards
 │   └── current-state.md       # This file
-├── frontend/                  # (Not created yet)
-├── worker-api/                # (Not created yet)
-├── worker-jobs/               # (Not created yet)
-└── shared/                    # (Not created yet)
+├── frontend/                  # ✅ Vite + React + TanStack (5 files)
+├── worker-api/                # ✅ Hono + Zod + OpenAPI (8 files)
+├── worker-jobs/               # ✅ Cloudflare Cron Workers (6 files)
+├── .github/workflows/         # ✅ CI/CD skeleton (1 file)
+└── package.json               # ✅ Root workspace config
 ```
+
+**Total: 37 files created, all packages compiling with TypeScript strict mode.**
 
 ## Success Criteria (Reminder)
 
@@ -154,4 +168,4 @@ See `spec.md` for full out-of-scope list.
 
 ## Next Action
 
-Start Week 1: Scaffold monorepo, set up Supabase migrations, install @hono/zod-openapi, define core Zod schemas, build property CRUD, implement iCal parser.
+**Continue Week 1:** Set up Supabase schema and migrations (create all 6 tables with RLS policies).
