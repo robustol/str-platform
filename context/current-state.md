@@ -1,6 +1,6 @@
 # STR Platform — Current State
 
-**Last updated:** 2026-03-22
+**Last updated:** 2026-03-23
 
 ## Project Status
 
@@ -29,6 +29,11 @@
 - ✅ Twilio WhatsApp sandbox configured
 - ✅ Cloudflare account ready
 - ✅ GitHub repo initialized
+
+### Phase 0: CI/CD and Documentation ✅
+- ✅ Auto context update GitHub Actions workflow configured
+- ✅ Pure Python file reading implementation for context updates
+- ✅ Documentation context files finalized and versioned
 
 ### Week 1: Monorepo Scaffolding ✅
 - ✅ **37 files created** across monorepo structure
@@ -83,89 +88,4 @@
 - Manual task creation form
 - Task detail view with checklist
 
-### Week 3: WhatsApp Integration (Target: 5 days)
-- Twilio message templates (submit for approval)
-- Inbound webhook handler (keyword parsing)
-- Cleaner management (add/edit/assign to properties)
-- Task notification and reminder flows
-
-### Week 4: Polish and Deploy (Target: 5 days)
-- Email notifications (Resend integration)
-- Non-response escalation logic
-- Same-day turnover warnings
-- Testing with real iCal feeds from Airbnb/Booking.com
-- Bug fixes and edge case handling
-- Production deployment
-
-## Known Blockers
-
-**None.** All pre-development setup complete. Ready to start Week 1.
-
-## Technical Decisions Made
-
-### Why Cloudflare Workers?
-Edge compute with native cron support, low cost at scale, integrated with Pages.
-
-### Why Supabase?
-Postgres with RLS for secure multi-tenancy, auth included, realtime subscriptions for live updates.
-
-### Why Twilio WhatsApp API?
-Simpler setup than Meta Cloud API, better docs, allows pre-approved message templates.
-
-### Why @hono/zod-openapi?
-Single source of truth for API contracts, type-safe request/response validation, auto-generated docs.
-
-### Why No Shared Database Code?
-Workers deploy independently. Tight coupling slows iteration. Each worker imports Drizzle schema directly.
-
-## Repository Structure
-
-```
-str-platform/
-├── spec.md                    # Product spec (source of truth)
-├── context/
-│   ├── architecture.md        # Tech stack, monorepo, constraints
-│   ├── conventions.md         # Coding standards
-│   └── current-state.md       # This file
-├── frontend/                  # ✅ Vite + React + TanStack (5 files)
-├── worker-api/                # ✅ Hono + Zod + OpenAPI (8 files)
-├── worker-jobs/               # ✅ Cloudflare Cron Workers (6 files)
-├── .github/workflows/         # ✅ CI/CD skeleton (1 file)
-└── package.json               # ✅ Root workspace config
-```
-
-**Total: 37 files created, all packages compiling with TypeScript strict mode.**
-
-## Success Criteria (Reminder)
-
-The MVP is validated when:
-1. **5 hosts** have onboarded at least **2 properties** each
-2. **Cleaners complete tasks via WhatsApp** without needing additional explanation
-3. **Hosts stop texting their cleaners** via personal WhatsApp for routine turnovers
-4. **Zero missed cleans** due to system failure over a 30-day period
-
-**The metric that matters:** Do hosts stop texting their cleaners on WhatsApp for routine turnovers?
-
-## What We're NOT Building in MVP
-
-- Native mobile apps
-- Cleaner payments / invoicing
-- Cleaner marketplace
-- Inventory / supply tracking
-- Analytics / dashboards
-- Multi-user roles / team management
-- Smart lock integrations
-- PMS API integrations
-- AI scheduling
-- Multi-language support (English only)
-- Photo verification of completed cleans (only issue photos)
-
-See `spec.md` for full out-of-scope list.
-
-## Open Questions
-
-**None.** All pre-development decisions made. Ready to build.
-
-## Next Action
-
-**Continue Week 1:** Set up Supabase schema and migrations (create all 6 tables with RLS policies).
+### Week 3: WhatsApp Integration (Target
