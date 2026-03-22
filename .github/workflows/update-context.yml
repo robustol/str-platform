@@ -17,56 +17,35 @@ jobs:
         with:
           fetch-depth: 10
 
-      - name: Get recent commits
-        id: commits
-        run: |
-          echo "COMMITS<<EOF" >> $GITHUB_OUTPUT
-          git log --oneline -5 >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-
-      - name: Read current context
-        id: context
-        run: |
-          echo "CURRENT_STATE<<EOF" >> $GITHUB_OUTPUT
-          cat context/current-state.md >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-
       - name: Update context via Claude
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
-          CURRENT_STATE='${{ steps.context.outputs.CURRENT_STATE }}'
-          COMMITS='${{ steps.commits.outputs.COMMITS }}'
-
           python3 << 'PYEOF'
-          import os, json, urllib.request
+          import os, json, urllib.request, subprocess
 
           api_key = os.environ["ANTHROPIC_API_KEY"]
-          current_state = os.environ.get("CURRENT_STATE", "")
-          commits = os.environ.get("COMMITS", "")
 
           with open("context/current-state.md", "r") as f:
               current_state = f.read()
 
-          import subprocess
           commits = subprocess.check_output(
               ["git", "log", "--oneline", "-5"], text=True
           ).strip()
 
-          prompt = f"""Update this project context file based on recent git commits.
-
-          Current context:
-          {current_state}
-
-          Recent commits:
-          {commits}
-
-          Instructions:
-          - Update the "What's done" section to reflect completed work from commits
-          - Update the "What's next" section based on what logically follows
-          - Update the status line if the phase has changed
-          - Keep the exact same markdown format and structure
-          - Output only the updated markdown content, nothing else, no preamble"""
+          prompt = (
+              "Update this project context file based on recent git commits.\n\n"
+              "Current context:\n"
+              + current_state
+              + "\n\nRecent commits:\n"
+              + commits
+              + "\n\nInstructions:\n"
+              "- Update the What's done section to reflect completed work from commits\n"
+              "- Update the What's next section based on what logically follows\n"
+              "- Update the status line if the phase has changed\n"
+              "- Keep the exact same markdown format and structure\n"
+              "- Output only the updated markdown content, nothing else"
+          )
 
           payload = {
               "model": "claude-haiku-4-5-20251001",
