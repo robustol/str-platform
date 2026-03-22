@@ -35,6 +35,8 @@ A lightweight operations platform for short-term rental hosts that automates cle
 - **Frontend:** Vite + React SPA on Cloudflare Pages
 - **Backend:** Cloudflare Workers (API + background jobs)
 - **Database/Auth/Realtime:** Supabase
+- **API validation:** Zod via @hono/zod-openapi
+- **API docs:** OpenAPI auto-generated from Zod schemas
 - **Messaging:** Twilio WhatsApp API
 - **Email:** Resend
 - **Cron/Scheduling:** Cloudflare Cron Triggers
@@ -398,7 +400,7 @@ The MVP is validated when:
 
 | Phase | Scope | Duration |
 |---|---|---|
-| Week 1 | Monorepo setup with Wrangler, Supabase setup, data model, auth, property CRUD, iCal parser | 5 days |
+| Week 1 | Monorepo setup with Wrangler, Supabase setup, data model, auth, install and configure @hono/zod-openapi, define base Zod schemas for all core data model types, property CRUD, iCal parser | 5 days |
 | Week 2 | Task auto-creation engine, host dashboard (task list, filters, detail view), manual task creation | 5 days |
 | Week 3 | WhatsApp Business API integration, message templates, inbound message parser, cleaner management | 5 days |
 | Week 4 | Notifications, non-response escalation, edge case handling, testing with real iCal feeds, bug fixes, deploy | 5 days |
