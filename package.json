@@ -1,0 +1,20 @@
+{
+  "name": "str-platform",
+  "private": true,
+  "scripts": {
+    "dev:api": "pnpm --filter @str/worker-api dev",
+    "dev:jobs": "pnpm --filter @str/worker-jobs dev",
+    "dev:frontend": "pnpm --filter @str/frontend dev",
+    "build": "pnpm -r build",
+    "build:frontend": "pnpm --filter @str/frontend build",
+    "test": "pnpm -r test",
+    "typecheck": "pnpm -r typecheck",
+    "deploy:api": "pnpm --filter @str/worker-api deploy",
+    "deploy:jobs": "pnpm --filter @str/worker-jobs deploy",
+    "deploy:frontend": "pnpm --filter @str/frontend deploy"
+  },
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9"
+  }
+}
